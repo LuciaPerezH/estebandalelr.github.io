@@ -156,13 +156,13 @@ export default function BatteryMaterialsVisual({ visual }: { visual: string }) {
         <Label x={300} y={48} size={13} weight={700} color={C.lfp}>
           Co: stability, high cost
         </Label>
-        <Label x={corner.Ni[0] + 6} y={corner.Ni[1] + 44} size={13} weight={700} color={C.hot} anchor="start">
+        <Label x={corner.Ni[0] + 6} y={corner.Ni[1] + 38} size={13} weight={700} color={C.hot} anchor="start">
           Ni: capacity, reactive
         </Label>
-        <Label x={corner.Mn[0] - 6} y={corner.Mn[1] + 44} size={13} weight={700} color={C.copper} anchor="end">
+        <Label x={corner.Mn[0] - 6} y={corner.Mn[1] + 38} size={13} weight={700} color={C.copper} anchor="end">
           Mn: cheap, unstable
         </Label>
-        <Label x={300} y={410} size={13} color={C.dim}>
+        <Label x={300} y={436} size={13} color={C.dim}>
           LiCoO₂ ≈ 3.9 V, 140–150 mAh/g · NMC 111 ≈ 3.7 V, 170 mAh/g · NCA ≈ 200 mAh/g
         </Label>
       </Reveal>
@@ -245,7 +245,7 @@ export default function BatteryMaterialsVisual({ visual }: { visual: string }) {
         {ANODES.map((a) => (
           <g key={a.t}>
             <line x1={potBox.x + 20} y1={pot.sy(a.v)} x2={potBox.x + 150} y2={pot.sy(a.v)} stroke={a.c} strokeWidth={4} strokeLinecap="round" />
-            <Label x={potBox.x + 160} y={pot.sy(a.v) - 3} size={12} anchor="start" color={a.c}>
+            <Label x={potBox.x + 160} y={pot.sy(a.v) + (a.v === 0 ? 14 : a.v === 0.1 ? -10 : -3)} size={12} anchor="start" color={a.c}>
               {`${a.t} ${a.v} V`}
             </Label>
           </g>
@@ -289,7 +289,7 @@ export default function BatteryMaterialsVisual({ visual }: { visual: string }) {
           </g>
         ))}
         {[
-          { t: "Si, Sn", s: "huge volume change, poor cycle life", c: C.hot },
+          { t: "Si, Sn", s: "huge volume change; poor cycle life", c: C.hot },
           { t: "Conversion (MₓXᵧ)", s: "large capacity, voltage hysteresis", c: C.anion },
           { t: "Li metal", s: "dendrites, poor SEI, low CE", c: C.lithium },
         ].map((f, i) => (
@@ -298,9 +298,11 @@ export default function BatteryMaterialsVisual({ visual }: { visual: string }) {
             <Label x={120 + i * 190} y={312} size={13} weight={700} color={f.c}>
               {f.t}
             </Label>
-            <Label x={120 + i * 190} y={334} size={11} color={C.dim}>
-              {f.s}
-            </Label>
+            {f.s.split(";").map((line, j) => (
+              <Label key={j} x={120 + i * 190} y={328 + j * 14} size={11} color={C.dim}>
+                {line.trim()}
+              </Label>
+            ))}
           </g>
         ))}
         <Label x={300} y={384} size={13} color={C.dim}>
@@ -314,10 +316,10 @@ export default function BatteryMaterialsVisual({ visual }: { visual: string }) {
           Recurring materials challenges
         </Label>
         {["volume change", "phase transformations", "mechanical degradation", "thermal stability", "critical raw materials: Li, Co, Ni"].map((t, i) => (
-          <Chip key={t} x={i < 3 ? 110 + i * 190 : 200 + (i - 3) * 230} y={i < 3 ? 76 : 114} text={t} color={C.hot} w={t.length * 8 + 28} />
+          <Chip key={t} x={i < 3 ? 100 + i * 190 : 200 + (i - 3) * 230} y={i < 3 ? 76 : 114} text={t} color={C.hot} w={t.length * 7 + 28} />
         ))}
         {[
-          { t: "LFP", d: "1D channels", i: "two-phase reaction, transport limits", c: C.electron },
+          { t: "LFP", d: "1D channels", i: "two-phase reaction; transport limits", c: C.electron },
           { t: "Graphite", d: "2D transport", i: "staging, Li plating, SEI", c: "#94a3b8" },
           { t: "NMC", d: "2D layers", i: "solid solution; cation mixing, cracks, O loss", c: C.lfp },
         ].map((m, i) => (

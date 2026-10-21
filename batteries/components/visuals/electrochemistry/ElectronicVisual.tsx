@@ -66,7 +66,7 @@ function DopingPanel({ x, title, ef, extra }: { x: number; title: string; ef: nu
       <Rect x={x} y={cbY - 30} w={140} h={30} fill={C.accent} op={0.18} stroke={C.accent} />
       <Rect x={x} y={vbY} w={140} h={46} fill={C.lfp} op={0.7} />
       <line x1={x - 6} y1={ef} x2={x + 146} y2={ef} stroke={C.electron} strokeWidth={2} strokeDasharray="6 4" />
-      <Label x={x + 70} y={ef - 6} size={12} color={C.electron}>
+      <Label x={x + 2} y={ef - 6} size={12} color={C.electron} anchor="start">
         E_F
       </Label>
       {extra === "donor" && (
@@ -155,7 +155,7 @@ export default function ElectronicVisual({ visual }: { visual: string }) {
       {/* levels -> band */}
       <Reveal show={visual === "levels"}>
         <line x1={30} y1={levelsY(-2.4)} x2={30} y2={levelsY(2.4)} stroke={C.dim} strokeWidth={1.5} markerEnd="url(#arrow)" />
-        <Label x={20} y={70} size={13} color={C.dim} anchor="start">
+        <Label x={38} y={62} size={13} color={C.dim} anchor="start">
           Energy
         </Label>
         {[1, 2, 4, 8].map((n, i) => {
@@ -194,7 +194,10 @@ export default function ElectronicVisual({ visual }: { visual: string }) {
 
       {/* E(k) */}
       <Reveal show={visual === "dispersion"}>
-        <Axes box={dispBox} xLabel="k" yLabel="E(k)" xLabelDy={64} />
+        <Axes box={dispBox} xLabel="" yLabel="E(k)" />
+        <Label x={dispBox.x + dispBox.w + 16} y={dispBox.y + dispBox.h + 5} size={14} color={C.dim} anchor="start">
+          k
+        </Label>
         <line x1={disp.sx(Math.PI)} y1={dispBox.y} x2={disp.sx(Math.PI)} y2={dispBox.y + dispBox.h} stroke={C.dim} strokeDasharray="4 4" />
         <DrawPath d={disp.path(freePts)} show={visual === "dispersion"} color={C.dim} width={2} dash="6 5" />
         <DrawPath d={disp.path(dispPts)} show={visual === "dispersion"} color={C.accent} width={3.5} delay={0.3} />
@@ -216,10 +219,10 @@ export default function ElectronicVisual({ visual }: { visual: string }) {
         <Label x={disp.sx(Math.PI) + 6} y={dispBox.y + dispBox.h + 74} size={12} color={C.dim} anchor="end">
           k = π/a: alternating, antibonding
         </Label>
-        <Label x={disp.sx(1.5)} y={dispBox.y + 40} size={14} weight={700} color={C.accent} anchor="start">
+        <Label x={dispBox.x + 12} y={dispBox.y + 44} size={14} weight={700} color={C.accent} anchor="start">
           E = α + 2β cos(ka)
         </Label>
-        <Label x={disp.sx(1.5)} y={dispBox.y + 62} size={13} color={C.dim} anchor="start">
+        <Label x={dispBox.x + 12} y={dispBox.y + 66} size={13} color={C.dim} anchor="start">
           free electron: ħ²k²/2m
         </Label>
         <Label x={dispBox.x + 12} y={dispBox.y + 14} size={13} color={C.dim} anchor="start">
@@ -271,10 +274,10 @@ export default function ElectronicVisual({ visual }: { visual: string }) {
         <Label x={dS.sx(1.1)} y={dS.sy(2.15)} size={13} color={C.electron} weight={700}>
           flat band: many states
         </Label>
-        <Label x={dS.sx(0.55)} y={dS.sy(0.5)} size={13} color={C.dim}>
+        <Label x={dS.sx(0.62)} y={dS.sy(0)} size={13} color={C.dim} anchor="start">
           steep: few states
         </Label>
-        <Label x={300} y={44} size={15} weight={700}>
+        <Label x={300} y={34} size={15} weight={700}>
           density of states ∝ 1 / slope of the band
         </Label>
       </Reveal>

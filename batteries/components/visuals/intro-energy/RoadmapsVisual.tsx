@@ -156,10 +156,10 @@ export default function RoadmapsVisual({ visual }: { visual: string }) {
         <Label x={140} y={292} size={13} weight={700}>
           land of the 139 countries
         </Label>
-        <Label x={62} y={112} size={13} color={C.lithium} anchor="start">
+        <Label x={50} y={112} size={12} color={C.lithium} anchor="start">
           0.22 % footprint
         </Label>
-        <Label x={62} y={134} size={13} color={C.accent} anchor="start">
+        <Label x={50} y={134} size={12} color={C.accent} anchor="start">
           0.92 % spacing (onshore wind)
         </Label>
         <Label x={140} y={320} size={12} color={C.dim}>
@@ -174,12 +174,12 @@ export default function RoadmapsVisual({ visual }: { visual: string }) {
         ].map((r, i) => (
           <g key={r.t}>
             <Label x={300} y={128 + i * 70} size={13} anchor="start" color={C.dim}>
-              {r.t}
+              {`${r.t}: potential used`}
             </Label>
             <rect x={300} y={138 + i * 70} width={260} height={22} rx={6} fill={C.grid} />
             <rect x={300} y={138 + i * 70} width={(260 * r.v) / 100} height={22} rx={6} fill={r.c} opacity={0.85} />
             <Label x={306} y={154 + i * 70} size={12} color="#0b1220" anchor="start" weight={700}>
-              {`${r.v} % of potential used`}
+              {`${r.v} %`}
             </Label>
           </g>
         ))}
