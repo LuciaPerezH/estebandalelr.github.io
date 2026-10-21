@@ -17,7 +17,7 @@ export const CARD_MS = 1200;
 
 export const clampWpm = (n: number) => {
   if (!Number.isFinite(n)) return 300;
-  return Math.min(MAX_WPM, Math.max(MIN_WPM, Math.round(n / WPM_STEP) * WPM_STEP));
+  return Math.min(MAX_WPM, Math.max(MIN_WPM, Math.round(n)));
 };
 
 // Units that should stay glued to the number before them: 160 mAh/g, 3.45 V, 25 °C, 10 %.

@@ -31,5 +31,5 @@ assert.equal(f("cat,"), 1.5);
 assert.equal(f("cat.") , 2.2);
 assert.equal(f("cat.", { stepEnd: true }), 3);
 assert.equal(f("cat", { dashAfter: true }), 1.5);
-assert.deepEqual([clampWpm(10), clampWpm(5000), clampWpm(312), clampWpm(NaN)], [100, 1000, 300, 300]);
+assert.deepEqual([clampWpm(10), clampWpm(5000), clampWpm(333), clampWpm(NaN)], [100, 1000, 333, 300]);
 console.log("rsvp checks passed");
